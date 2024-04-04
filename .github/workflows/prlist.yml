@@ -1,0 +1,27 @@
+name: List Active Pull Requests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  list_active_prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: List Active Pull Requests
+        id: list_prs
+        run: |
+          TOKEN='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'
+          REPO_OWNER=$YOUR_REPO_OWNER
+          REPO_NAME=$YOUR_REPO_NAME
+
+          # Fetch the list of open pull requests using GitHub API
+          curl -H "Authorization: token $TOKEN" \
+               "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/pulls" \
+               -o prs.json
+
+          # Parse the JSON response to get the list of pull requests
+          cat prs.json | jq -r '.[] | "\(.number): \(.title) (\(.user.login))"'
