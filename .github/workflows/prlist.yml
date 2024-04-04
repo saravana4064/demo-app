@@ -15,8 +15,8 @@ jobs:
         id: list_prs
         run: |
           TOKEN='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'
-          REPO_OWNER=$YOUR_REPO_OWNER
-          REPO_NAME=$YOUR_REPO_NAME
+          REPO_OWNER='saravana4064'
+          REPO_NAME='demo-app'
 
           # Fetch the list of open pull requests using GitHub API
           curl -H "Authorization: token $TOKEN" \
