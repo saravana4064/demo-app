@@ -19,9 +19,28 @@ jobs:
           REPO_NAME='demo-app'
 
           # Fetch the list of open pull requests using GitHub API
-          curl -H "Authorization: token $TOKEN" \
-               "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/pulls" \
-               -o prs.json
+          response=$(curl -sSf -H "Authorization: token $TOKEN" \
+                    "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/pulls")
+
+          # Check if curl command was successful
+          if [ $? -ne 0 ]; then
+            echo "Failed to fetch pull requests from GitHub API."
+            exit 1
+          fi
+
+          # Check if JSON response contains an array of pull requests
+          if ! echo "$response" | jq -e . >/dev/null; then
+            echo "Invalid JSON response received from GitHub API."
+            exit 1
+          fi
 
           # Parse the JSON response to get the list of pull requests
-          cat prs.json | jq -r '.[] | "\(.number): \(.title) (\(.user.login))"'
+          active_prs=$(echo "$response" | jq -r '.[] | "\(.number): \(.title) (\(.user.login))"')
+
+          # Check if there are any active pull requests
+          if [ -z "$active_prs" ]; then
+            echo "No active pull requests found."
+          else
+            echo "Active Pull Requests:"
+            echo "$active_prs"
+          fi
