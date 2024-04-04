@@ -13,8 +13,11 @@ jobs:
 
       - name: List Active Pull Requests
         id: list_prs
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          TOKEN='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'
+          # Fetch the GitHub token from environment variable
+          TOKEN=$GH_TOKEN
           REPO_OWNER='saravana4064'
           REPO_NAME='demo-app'
 
