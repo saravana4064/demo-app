@@ -8,10 +8,15 @@ on:
 jobs:
   close_stale_prs:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      
     steps:
       - name: Close stale pull requests
-        uses: actions/stale@v5
+        uses: actions/stale@v5.1.0
         with:
+          repo-token: ${{ secrets.GH_TOKEN }}
           stale-issue-message: 'This pull request has been automatically closed because it has been inactive for more than 14 days. Please reopen if you still intend to submit this pull request.'
           days-before-stale: 0
           days-before-close: 7
