@@ -1,6 +1,8 @@
 name: List Active Pull Requests
 
 on:
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
