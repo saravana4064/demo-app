@@ -15,8 +15,8 @@ jobs:
           script: |
             #write-host "hello world"
             pwd
-            mkdir workflow_demo
-            cd workflow_demo
-            pwd
+            #mkdir workflow_demo
+            #cd workflow_demo
+            #pwd
           
   
