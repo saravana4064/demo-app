@@ -11,5 +11,10 @@ jobs:
       runs-on: windows-latest
       steps:
         - name: show ip address
-          run: ipconfig
+          uses: Amadevus/pwsh-script@v2.0.3
+          with:
+            # PowerShell script to execute in Actions-hydrated context
+            script: 
+            ipconfig
+          
   
