@@ -1,0 +1,8 @@
+name: demo workflow
+on: workflow_dispatch
+jobs:
+  demojob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print
+        run: echo "demo pipeline"
