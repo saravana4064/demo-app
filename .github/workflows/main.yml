@@ -13,6 +13,6 @@ jobs:
         uses: Amadevus/pwsh-script@v2.0.3
         with:
           script: |
-            ipconfig
+            write-host "hello world"
           
   
