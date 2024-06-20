@@ -6,15 +6,13 @@ jobs:
     steps:
       - name: print
         run: echo "demo pipeline"
-  actionjob:
-    demoactionjob:
-      runs-on: windows-latest
-      steps:
-        - name: show ip address
-          uses: Amadevus/pwsh-script@v2.0.3
-          with:
-            # PowerShell script to execute in Actions-hydrated context
-            script: |
-              ipconfig
+  demoactionjob:
+    runs-on: windows-latest
+    steps:
+      - name: show ip address
+        uses: Amadevus/pwsh-script@v2.0.3
+        with:
+          script: |
+            ipconfig
           
   
